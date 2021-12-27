@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,7 +26,7 @@ namespace WindowsFormsApp5
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode==Keys.Enter)
+            if (e.KeyCode == Keys.Enter)
                 treeView1.SelectedNode.Nodes.Add(textBox1.Text);
 
         }
@@ -33,16 +34,23 @@ namespace WindowsFormsApp5
         private void button1_Click(object sender, EventArgs e)
         {
             folderBrowserDialog1.ShowDialog();
+            int sayi= treeView1.Nodes.Count;
             foreach (string item in Directory.GetDirectories(folderBrowserDialog1.SelectedPath))
             {
-                treeView1.Nodes.Add(new TreeNode(item));
+                treeView1.Nodes.Add(item);
+
+                foreach (var dosya in Directory.GetFiles(item))
+                {
+                    treeView1.Nodes[sayi].Nodes.Add(new TreeNode(dosya));
+                }
+                sayi++;
             }
-            foreach (string dosya in Directory.GetFiles(folderBrowserDialog1.SelectedPath))
+            foreach (var dosya in Directory.GetFiles(folderBrowserDialog1.SelectedPath))
             {
-                treeView1.SelectedNode.Nodes.Add(dosya);
+                treeView1.Nodes.Add(new TreeNode(dosya));
             }
-
-
         }
+
+        //asdfasdf
     }
 }
