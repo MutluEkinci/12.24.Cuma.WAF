@@ -50,7 +50,5 @@ namespace WindowsFormsApp5
                 treeView1.Nodes.Add(new TreeNode(dosya));
             }
         }
-
-        //asdfasdf
     }
 }
